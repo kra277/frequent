@@ -91,7 +91,9 @@ comm -13 <(ls march) <(ls april)
 
 ###############################################################
 
+# Get file sizes of files in a folder and subfolder
 
+du -ha | grep .gz | awk -F " " '{print $2, $1}'
 
 
 
