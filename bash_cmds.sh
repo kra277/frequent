@@ -96,6 +96,15 @@ comm -13 <(ls march) <(ls april)
 du -ha | grep .gz | awk -F " " '{print $2, $1}'
 
 
+# loop and find file names
+
+cat pwid_files.txt | while read line 
+
+  do
+     find . -name "*$line*" -type d # find each directory name from the .txt file
+     
+  done
+
 
 
 
