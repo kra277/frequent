@@ -1,0 +1,24 @@
+# Replacing data in a column
+
+data %>% 
+  mutate_at("column_name", str_replace, "replaceable", "new_term")
+  
+
+  
+  
+# Separate based on the number of character
+
+
+
+# Converting Long data into Wide data
+
+
+
+
+# Converting Wide data into Long data
+
+
+
+
+# Writing an excel file with multiple sheets
+
