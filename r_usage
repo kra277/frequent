@@ -19,8 +19,35 @@ mpg %>%
   glimpse()
 
 
-# Using case when and mutate to add new column variables
+# Using case_when and mutate to add new column variables
 
+## Create Ordinal variable for highway fuel consumption
+mpg %>% 
+  mutate("hwy_fuel_consum" = 
+           factor(case_when(hwy <= 20 ~ "High", 
+                            hwy <= 30 & hwy > 20  ~ "Moderate", 
+                            TRUE ~ "Low")))
+
+## Color key and ggplot 
+mpg %>% 
+  mutate("color_key" = 
+           factor(case_when(hwy <= 20 ~ "indianred2", 
+                            hwy <= 30 & hwy > 20  ~ "steelblue4", 
+                            hwy <= 40 & hwy > 30  ~ "aquamarine2",
+                            TRUE ~ "green4")), 
+         color_key = as.factor(color_key)) %>% 
+  ggplot(aes(x=class, y=hwy, color = color_key)) +
+  geom_point(size =4, alpha = 0.7, 
+             position = position_dodge2(width = 0.5)) +
+  scale_color_identity() +
+  theme_light() +
+  coord_flip() +
+  labs(title = "Pickups are not economical for long drives!!", 
+       subtitle = "Highway mileage of cars, separated by category.", 
+       caption = "mpg = Miles per gallon",
+       y = "", x = "") +
+  scale_y_continuous(breaks = seq(0,50,5), limits = c(0,45), 
+                     label = scales::label_comma(suffix = " mpg"))
 
 # Performing pivot wider
 
