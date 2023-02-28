@@ -17,3 +17,12 @@ mpg %>%
   mutate(across(c("manufacturer"), str_to_sentence), 
          across(c("displ", "drv"), as.factor)) %>% 
   glimpse()
+
+
+# Using case when and mutate to add new column variables
+
+
+# Performing pivot wider
+
+
+# Performing pivot longer
