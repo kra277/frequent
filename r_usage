@@ -49,6 +49,41 @@ mpg %>%
   scale_y_continuous(breaks = seq(0,50,5), limits = c(0,45), 
                      label = scales::label_comma(suffix = " mpg"))
 
+
+# ggplot with selective labelling 
+
+## make a custom df
+mpg_mod <- 
+  mpg %>% 
+  mutate("color_key" = 
+           factor(case_when(hwy <= 20 ~ "indianred2", 
+                            hwy <= 30 & hwy > 20  ~ "steelblue4", 
+                            hwy <= 40 & hwy > 30  ~ "aquamarine2",
+                            TRUE ~ "green4")), 
+         col_1 = paste(manufacturer, model, year, hwy, sep = "_")) %>% 
+  distinct(col_1, .keep_all = T) %>% 
+  select(-col_1)
+
+# ggplot with custom labels
+mpg_mod %>% 
+  ggplot(aes(x=class, y=hwy, color = color_key)) +
+  geom_point(size =4, alpha = 0.7, 
+             position = position_dodge2(width = 0.5)) +
+  scale_color_identity() +
+  theme_light() +
+  coord_flip() +
+  labs(title = "Pickups are not economical for long drives!!", 
+       subtitle = "Highway mileage of cars, separated by category.", 
+       caption = "mpg = Miles per gallon",
+       y = "", x = "") +
+  scale_y_continuous(breaks = seq(0,50,5), limits = c(0,45), 
+                     label = scales::label_comma(suffix = " mpg")) + 
+  geom_text_repel(aes(label = str_to_title(model)), 
+                  data = subset(mpg_mod, hwy > 43 | hwy <= 12), 
+                  nudge_x= 1, nudge_y = -0.5)
+
+
+
 # Performing pivot wider
 
 
