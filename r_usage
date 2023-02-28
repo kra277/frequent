@@ -85,6 +85,32 @@ mpg_mod %>%
 
 
 # Performing pivot wider
+## When there is repeated row data in a colum, as show below
+mpg %>% 
+  group_by(manufacturer) %>% 
+  dplyr::count(cyl)
 
+
+## it could be converted to a wide table
+mpg %>% 
+  group_by(manufacturer) %>% 
+  dplyr::count(cyl) %>% 
+  pivot_wider(names_from = cyl, 
+              values_from = n) 
 
 # Performing pivot longer
+# Pivot wider
+## When there is wide data as show below
+relig_income %>% head()
+
+## It can be converted to a long data as below
+relig_income %>%
+    pivot_longer(!religion, names_to = "income", values_to = "count")
+
+## if there are too many columns with same name, use starts_with() or ends_with()
+billboard %>%
+  pivot_longer(cols = starts_with("wk"),
+    names_to = "week",
+    names_prefix = "wk",
+    values_to = "rank",
+    values_drop_na = TRUE)
