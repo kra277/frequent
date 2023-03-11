@@ -1,0 +1,15 @@
+
+# Install GPG on mac
+brew install cask gpg-suite-no-mail
+
+# Export GPG key
+
+
+# Import GPG Key
+gpg --import 'Secret.asc' 
+
+# Encrypt File
+gpg -e -r kra277@nyu.edu sample_first.txt 
+
+# Decrypt File
+gpg -d sample_first.txt.gpg
