@@ -1,0 +1,13 @@
+# Given a df
+df <- data.frame(
+  name = c("Alice", "Bob", "Charlie"),
+  gender = c("F", "M", "M"),
+  grade_math = c(80, 90, 85),
+  grade_science = c(75, 85, 90),
+  grade_english = c(70, 80, 75))
+
+# If you like to filter for a grade hgiher or equal to 80
+df %>% filter_all(~. >= 80)
+
+# name gender grade_math grade_science grade_english
+#  Bob      M         90            85            80
