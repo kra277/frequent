@@ -17,3 +17,12 @@ function get_snps_in_gene_region() {
 
 # get_snps_in_gene_region function get the SNPs from a plink bfile $1 using the chr position provided as $2 and border $3
 
+
+# the chr position file of the gene should be in the following format
+
+# chr start_pos end_pos set_col
+# 7 99756960 99784248 0
+# 7 99648194 99679998 0
+# 3 119780484 119818487 0
+# 4 7192538 7742836 0
+# 2 233760270 233773300 0
