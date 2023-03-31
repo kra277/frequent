@@ -1,3 +1,4 @@
+# checking if GPG secret key can uploaded to a different computer
 
 # Install GPG on mac
 brew install cask gpg-suite-no-mail
