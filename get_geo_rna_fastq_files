@@ -11,5 +11,8 @@ brew install parallel
 # Using SRA toolkit, parallel and accession list download the files
 cat SRR_Acc_List.txt | parallel -j 4 fastq-dump  --split-files {}
 
+# compress the fastq files to .gz
+parallel gzip ::: *.fastq
+
 # References
 # Tange, O. (2023, March 22). GNU Parallel 20230322 ('Arrest Warrant'). Zenodo. https://doi.org/10.5281/zenodo.7761866
