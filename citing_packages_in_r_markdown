@@ -1,0 +1,67 @@
+```{r include=FALSE}
+require(pacman)
+require(tidyverse)
+
+get_package_citation_table <- function(){
+  appendix_packages <- data.frame(Package = character(),
+                                  Version = character(),
+                                  Maintainer = character(),
+                                  Citation = character())
+  
+  for (pkg in p_loaded()){
+    appendix_packages <- appendix_packages %>% add_row(
+      Package = pkg,
+      Version = as.character(packageVersion(pkg)),
+      Maintainer = maintainer(pkg),
+      Citation = format(citation(pkg), style = 'text')
+    )
+  }
+  appendix_packages <- appendix_packages %>% 
+    # add_row(
+    #   Package = "RStudio",
+    #   Version = as.character(RStudio.Version()$version),
+    #   Maintainer = "",
+    #   Citation = format(RStudio.Version()$citation, style = "text") 
+    # ) %>%
+    add_row(
+      Package = "R",
+      Version = paste(version$major,version$minor, sep="."),
+      Maintainer = "",
+      Citation = format(citation(), style = "text")
+    )
+  
+  appendix_packages %>%
+    mutate( Citation = Citation %>% # strip out the markdown
+              str_replace_all("_","") %>%
+              str_replace_all("[*]", "") %>%
+              str_replace_all("<URL:", "") %>%
+              str_replace_all(">","")) %>% 
+    arrange(Package) 
+}
+
+t <- get_package_citation_table() 
+```
+
+# Citations
+
+## Column {data-width=1000, .tabset}
+
+### References
+
+If any
+
+### R Pacakges
+
+```{r}
+caption <- "R Packages used for this project"
+analysis <- ""
+
+t %>%  
+  dt_table() 
+```
+
+### Session Info
+
+```{r}
+sessionInfo()
+```
