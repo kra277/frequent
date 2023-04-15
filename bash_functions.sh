@@ -26,3 +26,5 @@ function get_snps_in_gene_region() {
 # 3 119780484 119818487 0
 # 4 7192538 7742836 0
 # 2 233760270 233773300 0
+
+# this is a template
